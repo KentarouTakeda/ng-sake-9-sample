@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import 'rxjs/add/operator/retry';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,6 @@ export class AppComponent implements OnInit {
       responseType: 'text'
     });
 
-    this.http.request(request).subscribe( this.logs.push.bind(this.logs) );
+    this.http.request(request).retry().subscribe( this.logs.push.bind(this.logs) );
   }
 }
